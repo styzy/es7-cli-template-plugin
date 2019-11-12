@@ -8,7 +8,6 @@ const webpackConfig = {
         'plugin-name': './src/index.js'
     },
     output: {
-        library: 'plugin',
         libraryTarget: 'umd',
         path: path.resolve(__dirname, 'dist'),
         filename: `[name].js`
@@ -51,18 +50,19 @@ const webpackConfig = {
         ]
     },
     plugins: [
-        // new UglifyJSPlugin(),
-        // new MiniCssExtractPlugin({
-        //     filename: '[name].bundle.css',
-        //     chunkFilename: '[id].css',
-        //     ignoreOrder: false, // Enable to remove warnings about conflicting order
-        // }),
-        // new HtmlWebpackPlugin({
-        //     title: 'es7-cli',
-        //     template: 'index.html',
-        //     hash: true,
-        //     minify: true
-        // })
+        new UglifyJSPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].bundle.css',
+            chunkFilename: '[id].css',
+            ignoreOrder: false, // Enable to remove warnings about conflicting order
+        }),
+        new HtmlWebpackPlugin({
+            title: 'es7-cli',
+            template: 'index.html',
+            inject: 'head',
+            hash: true,
+            minify: true
+        })
     ]
 }
 
